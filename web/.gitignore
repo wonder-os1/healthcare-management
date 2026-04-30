@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+dist
+.env
+.env.local
+src/config/features.json
+config/client.json
+*.log
+.DS_Store

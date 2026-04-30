@@ -1,0 +1,9 @@
+# iOS
+app_identifier("com.wonderos.healthcare")
+apple_id("APPLE_ID_PLACEHOLDER")
+itc_team_id("ITC_TEAM_ID_PLACEHOLDER")
+team_id("TEAM_ID_PLACEHOLDER")
+
+# Android
+json_key_file("./google-services.json")
+package_name("com.wonderos.healthcare")

@@ -1,0 +1,19 @@
+{
+  "branding": {
+    "appName": "HealthFirst Clinic",
+    "primaryColor": "#2563eb",
+    "tagline": "Your Health, Our Priority",
+    "logoUrl": ""
+  },
+  "features": {
+    "telemedicine": false,
+    "labIntegration": true,
+    "smsNotifications": false,
+    "whatsappAutomation": false,
+    "aiChatbot": false,
+    "advancedAnalytics": false
+  },
+  "environment": {
+    "API_URL": "http://localhost:4000/api"
+  }
+}

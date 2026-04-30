@@ -1,0 +1,79 @@
+default_platform(:ios)
+
+# ──── iOS ────
+platform :ios do
+  desc "Sync certificates and provisioning profiles"
+  lane :sync_certs do
+    match(type: "appstore")
+    match(type: "development")
+  end
+
+  desc "Build iOS app for TestFlight"
+  lane :beta do
+    sync_certs
+    build_app(
+      workspace: "ios/HealthcareApp.xcworkspace",
+      scheme: "HealthcareApp",
+      export_method: "app-store",
+      clean: true,
+      output_directory: "./build",
+      output_name: "HealthcareApp.ipa"
+    )
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Deploy iOS to App Store"
+  lane :release do
+    sync_certs
+    build_app(
+      workspace: "ios/HealthcareApp.xcworkspace",
+      scheme: "HealthcareApp",
+      export_method: "app-store",
+      clean: true
+    )
+    upload_to_app_store(
+      force: true,
+      skip_screenshots: true,
+      skip_metadata: false
+    )
+  end
+end
+
+# ──── Android ────
+platform :android do
+  desc "Build Android APK for internal testing"
+  lane :beta do
+    gradle(
+      project_dir: "android",
+      task: "bundleRelease"
+    )
+    upload_to_play_store(
+      track: "internal",
+      aab: "android/app/build/outputs/bundle/release/app-release.aab",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Deploy Android to Play Store"
+  lane :release do
+    gradle(
+      project_dir: "android",
+      task: "bundleRelease"
+    )
+    upload_to_play_store(
+      track: "production",
+      aab: "android/app/build/outputs/bundle/release/app-release.aab"
+    )
+  end
+end
+
+# ──── Shared ────
+desc "Increment build number"
+lane :bump do
+  # For EAS builds, use eas.json autoIncrement instead
+  UI.message("Use EAS CLI: eas build --auto-submit --profile production")
+end

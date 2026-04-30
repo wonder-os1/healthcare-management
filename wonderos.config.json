@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "structure": {
+    "api": {
+      "path": "api",
+      "framework": "express",
+      "runtime": "node",
+      "configPaths": {
+        "features": "config/features.json",
+        "client": "config/client.json",
+        "env": ".env"
+      },
+      "deployTarget": "coolify",
+      "buildCommand": "npm run build",
+      "startCommand": "npm start",
+      "injectScript": "scripts/inject.ts"
+    },
+    "web": {
+      "path": "web",
+      "framework": "nextjs",
+      "runtime": "node",
+      "configPaths": {
+        "features": "src/config/features.json",
+        "founder": "src/config/founder.json",
+        "brandTokens": "src/styles/brand-tokens.css"
+      },
+      "deployTarget": "coolify",
+      "buildCommand": "npm run build",
+      "startCommand": "npm start"
+    },
+    "mobile": {
+      "path": "mobile",
+      "framework": "expo",
+      "runtime": "react-native",
+      "configPaths": {
+        "features": "lib/features.json",
+        "appJson": "app.json",
+        "client": "config/client.json"
+      },
+      "deployTarget": "eas",
+      "buildProfiles": {
+        "development": "development",
+        "preview": "preview",
+        "production": "production"
+      },
+      "injectScript": "scripts/inject.ts"
+    }
+  },
+  "shared": {
+    "path": "shared",
+    "description": "Shared types, constants, and utilities across api/web/mobile"
+  }
+}

@@ -1,0 +1,5 @@
+git_url("MATCH_GIT_URL_PLACEHOLDER")
+storage_mode("git")
+type("appstore")
+app_identifier(["com.wonderos.healthcare"])
+username("APPLE_ID_PLACEHOLDER")

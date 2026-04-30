@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.local
+uploads/
+config/client.json
+src/config/features.json
+*.log
+.DS_Store
